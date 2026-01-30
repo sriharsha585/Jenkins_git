@@ -8,8 +8,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'   // or npm install, etc.
+                sh 'mvn clean package'   // or npm install, etc.
             }
         }
         stage('Deploy') {
