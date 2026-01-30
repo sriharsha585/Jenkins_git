@@ -1,0 +1,18 @@
+version: 0.3
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies
+      - mvn install
+  build:
+    commands:
+      - echo Build started
+      - mvn clean package
+
+artifacts:
+  files:
+    - target/*.jar
+cache:
+  paths:
+    - ~/.m2/**/*   # speeds up Maven builds
