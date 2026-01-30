@@ -12,11 +12,11 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                    sh 'scp target/app.jar ec2-user@3.87.237.90:/home/ec2-user/'
-                    sh 'ssh ec2-user@3.87.237.90 "java -jar /home/ec2-user/app.jar &"'
-                
-            }
+    steps {
+        sshagent(['ec2-key']) {
+            sh 'scp -o StrictHostKeyChecking=no target/app.jar ec2-user@3.87.237.90:/home/ec2-user/'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@3.87.237.90 "nohup java -jar /home/ec2-user/app.jar > app.log 2>&1 &"'
         }
     }
+}
 }
