@@ -13,10 +13,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sshagent(['ec2-key']) {
                     sh 'scp target/app.jar ec2-user@3.87.237.90:/home/ec2-user/'
                     sh 'ssh ec2-user@3.87.237.90 "java -jar /home/ec2-user/app.jar &"'
-                }
+                
             }
         }
     }
